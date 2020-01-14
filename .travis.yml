@@ -15,6 +15,6 @@ script:
  - docker images | grep -c fastqc
  - echo 'Verify program(s) from this repo'
  - docker run -t --rm fastqc fastqc -h
- - ls -lrt ${TRAVIS_BUILD_DIR}
- - docker run -v ${TRAVIS_BUILD_DIR}:/workspace -t --rm fastqc fastqc /workspace/test/test.fq
+ - ls -lrt ${TRAVIS_BUILD_DIR}/test
+ - docker run -v ${TRAVIS_BUILD_DIR}/test:/tmp/test -t --rm fastqc fastqc /tmp/test/test.fq
  - if [ -f ${TRAVIS_BUILD_DIR}/test_fastqc.zip ]; then echo "FastQC results exist" || travis_terminate 0 
