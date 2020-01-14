@@ -2,9 +2,9 @@ notifications:
   slack: wsi-t113:SRHSOd3CgFDUwFxqv8SCXuIf
   email: false
 
-sudo: false
-
 language: ruby
+
+os: linux
 
 services:
  - docker
@@ -16,4 +16,4 @@ script:
  - echo 'Verify program(s) from this repo'
  - docker run -t --rm fastqc fastqc -h
  - docker run -v ${TRAVIS_BUILD_DIR}/test:/tmp/test -t --rm fastqc fastqc /tmp/test/test.fq
- - [ -f ${TRAVIS_BUILD_DIR}/test_fastqc.zip ] && echo "FastQC results exist" || travis_terminate 0; 
+ - if [ -f ${TRAVIS_BUILD_DIR}/test_fastqc.zip ]; then echo "FastQC results exist" || travis_terminate 0; 
